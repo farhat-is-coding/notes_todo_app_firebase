@@ -39,6 +39,7 @@ class UserNotes extends StatelessWidget {
           ),];
           var notes = snapshot.data;
           for (var note in notes!) {
+            // log(note);
             notesList.add(MyNoteCard(
               note: note,
             ));

@@ -56,12 +56,12 @@ class MyNoteCard extends StatelessWidget {
                         overflow: TextOverflow.fade,
                       ),
                     ),
-                    AuthService().user?.photoURL == ""?
+                    note.pfp == "" ?
                     CircleAvatar(
                       foregroundImage: AssetImage("assets/icons/yolo.jpg"),
                     ):
                     CircleAvatar(
-                      foregroundImage: NetworkImage(AuthService().user!.photoURL!),
+                      foregroundImage: NetworkImage(note.pfp),
                     )
                   ],
                 ),

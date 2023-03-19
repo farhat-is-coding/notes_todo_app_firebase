@@ -22,16 +22,10 @@ class SettingScreen extends StatelessWidget {
             SizedBox(
               height: 100,
             ),
-            AuthService().user?.photoURL == ""
-                ? CircleAvatar(
-                    backgroundImage: AssetImage('assets/icons/yolo.jpg'),
-                    radius: 80,
-                  )
-                : CircleAvatar(
-                    backgroundImage:
-                        NetworkImage(AuthService().user!.photoURL!),
-                    radius: 50,
-                  ),
+            CircleAvatar(
+              backgroundImage: NetworkImage(AuthService().user?.photoURL ?? "https://pbs.twimg.com/media/FkXvaBSX0AoAXcB.jpg",),
+              radius: 50,
+            ),
             SettingBtn(
               title: 'Logout',
               ontap: () async {

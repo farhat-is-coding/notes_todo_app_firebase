@@ -21,7 +21,7 @@ class FirestoreService{
       "color": theme,
       "isPublic": isPublic,
       "timestamp": DateTime.now(),
-      "pfp": AuthService().user?.photoURL ?? ""
+      "pfp": AuthService().user?.photoURL ?? "https://pbs.twimg.com/media/FkXvaBSX0AoAXcB.jpg"
     };
 
     docRef.set(data, SetOptions(merge: true)).then(
@@ -42,7 +42,7 @@ class FirestoreService{
       "color": theme,
       "isPublic": isPublic,
       "timestamp": DateTime.now(),
-      "pfp": AuthService().user?.photoURL
+      "pfp": AuthService().user?.photoURL ?? "https://pbs.twimg.com/media/FkXvaBSX0AoAXcB.jpg"
     };
     return ref.set(data, SetOptions(merge: true));
   }
@@ -138,7 +138,7 @@ class FirestoreService{
     var snapshot = await ref.get(); // get gets a document only once (not realtime)
     var data = snapshot.docs.map((s) => s.data()); // foreach loop is used
     var notes = data.map((d) => Notes.fromJson(d));
-    //log(topics.toString());
+    // log(notes.toString());
     return notes.toList();
   }
 
