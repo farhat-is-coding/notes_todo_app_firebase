@@ -1,10 +1,6 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
-
-import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:notes_app/services/auth.dart';
 import 'package:rive/rive.dart';
 import 'dart:ui';
@@ -48,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
             left: 100,
             child: Image.asset("assets/Backgrounds/Spline.png"),
           ),
-          RiveAnimation.asset("assets/RiveAssets/shapes.riv"),
+          const RiveAnimation.asset("assets/RiveAssets/shapes.riv"),
           Positioned.fill(
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 35, sigmaY: 35),
@@ -62,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Flawless Notes App",
                     style: TextStyle(
                       fontSize: 50,
@@ -71,9 +67,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 16),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  const SizedBox(height: 16),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Text(
                       "Make Public & Private Notes that you can share with alot of features.",
                       textAlign: TextAlign.center,
@@ -82,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   AnimButton(
                     btnAnimationController: _btnAnimationController,
                     onTap: (){
@@ -96,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       _singlePress = false;
                     },
                     title: "Anonymous Login",
-                    icon: Icon(Icons.hide_source_outlined),
+                    icon: const Icon(Icons.hide_source_outlined),
                   ),
                   AnimButton(
                     btnAnimationController: _btnAnimationController,
@@ -111,7 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       _singlePress = false;
                     },
                     title: "Google Login",
-                    icon: Icon(CupertinoIcons.greaterthan_circle_fill),
+                    icon: const Icon(CupertinoIcons.greaterthan_circle_fill),
                   ),
                 ],
               ),
@@ -123,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 class AnimButton extends StatelessWidget {
-  AnimButton({
+  const AnimButton({super.key,
     required  this.btnAnimationController,
     required this.onTap,
     required this.title,
@@ -132,8 +128,8 @@ class AnimButton extends StatelessWidget {
 
   final RiveAnimationController btnAnimationController;
   final VoidCallback onTap;
-  String title;
-  Icon icon;
+  final String title;
+  final Icon icon;
 
   @override
   Widget build(BuildContext context) {
@@ -155,10 +151,10 @@ class AnimButton extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   icon,
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Text(
                     title,
-                    style: TextStyle(fontWeight: FontWeight.w600),
+                    style: const TextStyle(fontWeight: FontWeight.w600),
                   ),
                 ],
               ),

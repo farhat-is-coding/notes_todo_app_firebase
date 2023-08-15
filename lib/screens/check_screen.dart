@@ -1,11 +1,9 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:notes_app/screens/home/home_screen.dart';
 
 import '../services/auth.dart';
 import '../shared/error.dart';
-import '../shared/loading.dart';
 import 'login/login_screen.dart';
 
 class CheckScreen extends StatelessWidget {
@@ -18,7 +16,7 @@ class CheckScreen extends StatelessWidget {
       builder: (context, snapshot) {
         //log('User ${AuthService().user}');
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Loader();
+          return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
           return  Center(
             child: ErrorMessage(message: snapshot.error.toString()),
@@ -26,7 +24,7 @@ class CheckScreen extends StatelessWidget {
         } else if (snapshot.hasData) { // user is logged in
           return HomeScreen();
         } else { //user is null
-          return LoginScreen();
+          return const LoginScreen();
         }
       },
     );

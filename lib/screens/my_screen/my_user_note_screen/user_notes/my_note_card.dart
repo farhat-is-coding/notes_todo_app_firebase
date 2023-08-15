@@ -1,21 +1,19 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:notes_app/services/auth.dart';
+
+import 'package:get/get.dart';
+import 'package:notes_app/controller/note_controller.dart';
 import 'package:notes_app/services/firestore.dart';
 import 'package:notes_app/services/models.dart';
 
-import 'add_note_screen.dart';
 
 class MyNoteCard extends StatelessWidget {
-  MyNoteCard({
+  MyNoteCard({super.key,
     required this.note,
   });
   final Notes note;
+  final NoteController noteController = Get.put(NoteController());
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +27,12 @@ class MyNoteCard extends StatelessWidget {
           Navigator.pushNamed(context, '/my');
         },
         onTap: (){
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder:(context)=>AddNoteScreen(myNote: note,)));
+          noteController.setNote(note);
+
+          Get.toNamed('/addnote');
+
+          // Navigator.of(context)
+          //     .push(MaterialPageRoute(builder:(context)=>AddNoteScreen(myNote: note,)));
 
         },
         child: Container(
@@ -38,7 +40,7 @@ class MyNoteCard extends StatelessWidget {
           height: 150,
           decoration: BoxDecoration(
               color: Color(int.parse(note.color)),
-            borderRadius: BorderRadius.all(Radius.circular(20))
+            borderRadius: const BorderRadius.all(Radius.circular(20))
           ),
           child: Padding(
             padding: const EdgeInsets.all(12.0),
@@ -51,13 +53,13 @@ class MyNoteCard extends StatelessWidget {
                     Flexible(
                       child: Text(
                         note.title,
-                        style: TextStyle(fontSize: 27, color: Colors.white, fontWeight: FontWeight.bold
+                        style: const TextStyle(fontSize: 27, color: Colors.white, fontWeight: FontWeight.bold
                         ),
                         overflow: TextOverflow.fade,
                       ),
                     ),
                     note.pfp == "" ?
-                    CircleAvatar(
+                    const CircleAvatar(
                       foregroundImage: AssetImage("assets/icons/yolo.jpg"),
                     ):
                     CircleAvatar(
@@ -68,11 +70,11 @@ class MyNoteCard extends StatelessWidget {
                 Flexible(
                   child: Text(
                     note.note,
-                    style: TextStyle(fontSize: 21, color: Colors.white.withOpacity(0.7)),
-                    overflow: TextOverflow.clip,
+                    style: TextStyle(fontSize: 16, color: Colors.white.withOpacity(0.7)),
+                    overflow: TextOverflow.visible,
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Align(
                   alignment: Alignment.bottomRight,
                   child: Text(

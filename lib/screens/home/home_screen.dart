@@ -1,15 +1,7 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:notes_app/screens/home/todo_card.dart';
-import 'package:notes_app/screens/home/todo_stream.dart';
-import 'package:notes_app/services/firestore.dart';
-import 'package:notes_app/services/models.dart';
-
+import 'package:notes_app/screens/home/todo/todo_list.dart';
 import 'bottom_nav_bar.dart';
-import 'note_card.dart';
-import 'note_stream.dart';
+import 'notes/note_grid.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -26,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
       initialIndex: 0,
       child: Scaffold(
         appBar: AppBar(
-          flexibleSpace: Column(
+          flexibleSpace: const Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               TabBar(
@@ -45,8 +37,8 @@ class _HomeScreenState extends State<HomeScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 5, left: 18.0),
+                const Padding(
+                  padding: EdgeInsets.only(top: 5, left: 18.0),
                   child: Text(
                     "Latest Notes",
                     style: TextStyle(fontSize: 35, fontWeight: FontWeight.w800),
@@ -58,7 +50,16 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+
               children: [
+                const Padding(
+                  padding: EdgeInsets.only(top: 5, left: 18.0),
+                  child: Text(
+                    "Latest Todos",
+                    style: TextStyle(fontSize: 35, fontWeight: FontWeight.w800),
+                  ),
+                ),
                 Expanded(
                   child: TodoRow(),
                 ),
@@ -66,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
             )
           ],
         ),
-        bottomNavigationBar: BottomNavBar(),
+        bottomNavigationBar: const BottomNavBar(),
       ),
     );
   }

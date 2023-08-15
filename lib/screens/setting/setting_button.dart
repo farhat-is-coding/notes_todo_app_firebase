@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-
-import '../../services/models.dart';
 
 class SettingBtn extends StatelessWidget {
-  SettingBtn({
+  const SettingBtn({
     required this.title,
     required this.ontap,
     this.iconsSrc = "assets/icons/yolo.jpg",
@@ -12,9 +9,9 @@ class SettingBtn extends StatelessWidget {
   });
 
   final iconsSrc;
-  String title;
-  VoidCallback ontap;
-  Color color;
+  final String title;
+  final VoidCallback ontap;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {

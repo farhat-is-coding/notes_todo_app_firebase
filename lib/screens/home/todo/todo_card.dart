@@ -1,20 +1,22 @@
-// ignore_for_file: use_key_in_widget_constructors
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:notes_app/controller/todo_controller.dart';
 import 'package:notes_app/services/firestore.dart';
 
-
 class TodoCard extends StatelessWidget {
-  TodoCard({
+  const TodoCard({
+    super.key,
     required this.task,
-    this.checked= false,
+    this.checked = false,
     this.taskid = "",
-    this.color = Colors.lightBlueAccent
+    this.color = Colors.lightBlueAccent,
+    this.home = false,
   });
 
-  String task, taskid;
-  bool checked;
-  Color color;
+  final String task, taskid;
+  final bool checked, home;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -50,15 +52,21 @@ class TodoCard extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             Checkbox(
-              side: BorderSide(color: Colors.white, style: BorderStyle.solid),
+              side: const BorderSide(
+                  color: Colors.white, style: BorderStyle.solid),
               value: checked,
               activeColor: Colors.lightBlueAccent.shade200,
+              onChanged: home
+                  ? null
+                  : (val) async {
+                      final TodoController todoController =
+                          Get.put(TodoController());
 
-              onChanged: (val) {
-                log(val.toString());
-                log(taskid);
-                FirestoreService().updateTodo(taskid, val!);
-              },
+                      log(val.toString());
+                      log(taskid);
+                      await FirestoreService().updateTodo(taskid, val!);
+                      todoController.getUserTodos();
+                    },
             ),
           ],
         ),

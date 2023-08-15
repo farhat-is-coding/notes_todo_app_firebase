@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:flutter/material.dart';
 part 'models.g.dart';
 
 @JsonSerializable()

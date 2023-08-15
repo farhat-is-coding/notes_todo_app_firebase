@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-
-import '../setting/setting.dart';
+import 'package:notes_app/controller/note_controller.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
@@ -11,7 +11,7 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  int _selectedIndex = 0;
+  final int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +34,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             activeColor: Colors.black,
             iconSize: 24,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            duration: Duration(milliseconds: 400),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+            duration: const Duration(milliseconds: 400),
             tabBackgroundColor: Colors.black.withOpacity(.2),
             color: Colors.black,
-            tabs: [
+            tabs: const [
               GButton(
                 icon: Icons.home,
               ),
@@ -51,15 +51,16 @@ class _BottomNavBarState extends State<BottomNavBar> {
             ],
             selectedIndex: _selectedIndex,
             onTabChange: (index) {
-              if(index == 1){
-
-                Navigator.pushNamed(context, '/my');
+              if (index == 1) {
+                final NoteController noteController = Get.put(NoteController());
+                noteController.getUserNotes();
+                Get.toNamed('/my');
+                // Navigator.pushNamed(context, '/my');
               }
-              if(index == 2){
-
-                Navigator.pushNamed(context, '/setting');
+              if (index == 2) {
+                Get.toNamed('/setting');
+                // Navigator.pushNamed(context, '/setting');
               }
-
             },
           ),
         ),
@@ -67,20 +68,3 @@ class _BottomNavBarState extends State<BottomNavBar> {
     );
   }
 }
-// Route _createRoute(dynamic x) {
-//   return PageRouteBuilder(
-//     pageBuilder: (context, animation, secondaryAnimation) => x,
-//     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-//       const begin = Offset(0.0, 1.0);
-//       const end = Offset.zero;
-//       const curve = Curves.ease;
-//
-//       var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-//
-//       return SlideTransition(
-//         position: animation.drive(tween),
-//         child: child,
-//       );
-//     },
-//   );
-// }

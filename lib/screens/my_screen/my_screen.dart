@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:notes_app/screens/my_screen/my_user_list_screen/my_list.dart';
-import 'package:notes_app/screens/my_screen/my_user_note_screen/my_notes.dart';
-import './my_user_list_screen/my_list.dart';
+import 'package:get/get.dart';
+import 'package:notes_app/controller/note_controller.dart';
+import 'package:notes_app/screens/my_screen/my_user_list_screen/my_list_screen.dart';
+import 'package:notes_app/screens/my_screen/my_user_note_screen/user_notes/my_notes_screen.dart';
+import 'package:notes_app/services/models.dart';
 
 class MyScreen extends StatefulWidget {
   const MyScreen({Key? key}) : super(key: key);
@@ -27,6 +29,7 @@ class _MyScreenState extends State<MyScreen> {
   ];
 
   PageController _pageController = PageController(initialPage: 0);
+  final NoteController noteController = Get.put(NoteController());
 
   @override
   Widget build(BuildContext context) {
@@ -35,18 +38,19 @@ class _MyScreenState extends State<MyScreen> {
         onPressed: () {
           //new screen to add a note
           if (_currentIndex == 0) {
+            noteController.setNote(Notes());
             Navigator.pushNamed(context, '/addnote');
           } else {
             addTaskModalBottomSheet(context);
           }
         },
+        backgroundColor: Colors.white,
         child: _currentIndex == 0
-            ? Icon(
+            ? const Icon(
                 Icons.star,
                 color: Colors.black,
               )
-            : Icon(Icons.add, color: Colors.lightBlueAccent, size: 40),
-        backgroundColor: Colors.white,
+            : const Icon(Icons.add, color: Colors.lightBlueAccent, size: 40),
       ),
       body: PageView(
         controller: _pageController,
@@ -55,7 +59,7 @@ class _MyScreenState extends State<MyScreen> {
             _currentIndex = newIndex;
           });
         },
-        children: [
+        children: const [
           MyNotesScreen(),
           MyListScreen(),
         ],
@@ -65,7 +69,7 @@ class _MyScreenState extends State<MyScreen> {
         items: _bottomNavigationBarItems,
         onTap: (index) {
           _pageController.animateToPage(index,
-              duration: Duration(milliseconds: 100), curve: Curves.easeIn);
+              duration: const Duration(milliseconds: 100), curve: Curves.easeIn);
         },
         //type: BottomNavigationBarType.fixed,
       ),

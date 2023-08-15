@@ -42,16 +42,13 @@ dependencies:
   animate_gradient: ^0.0.2
   undo: ^1.4.0
   intl: ^0.17.0
-  firebase_core: ^1.19.2
-  firebase_auth: ^3.4.2
-  cloud_firestore: ^3.3.0
+  firebase_core: 
+  firebase_auth: 
+  cloud_firestore: 
   json_annotation: 4.5.0
   google_sign_in: 5.3.3
   flutter_staggered_animations: ^1.0.0
-
-
-dependency_overrides:
-  firebase_core_platform_interface: 4.5.1
+  get:
 
 dev_dependencies:
   flutter_test:
